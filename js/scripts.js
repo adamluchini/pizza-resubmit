@@ -7,8 +7,8 @@ function Topping (pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4){
   this.pizzaTopping4=pizzaTopping4;
 }
 
-function PizzaSize (pizzaQuantity, pizzaSize){
-  this.pizzaQuantity=pizzaQuantity;
+function PizzaOrder (quantity, pizzaSize){
+  this.quantity=quantity;
   this.pizzaSize=pizzaSize;
 }
 
@@ -27,7 +27,7 @@ Topping.prototype.additionalCost=function(){
   return additionalCost
 }
 
-PizzaSize.prototype.sizeCost=function(){
+PizzaOrder.prototype.sizePrice=function(){
   var orderCost=0;
   if(this.pizzaSize === "small"){
     orderCost += 10;
@@ -37,7 +37,7 @@ PizzaSize.prototype.sizeCost=function(){
     orderCost +=15;
   }
 
-var orderPrice=orderCost*this.pizzaQuantity;
+var orderPrice=orderCost*this.quantity;
 return orderPrice
 }
 //user interface
@@ -45,17 +45,16 @@ $(document).ready(function(){
   $("form#order").submit(function(event){
     event.preventDefault();
 
-    var inputtedpizzaQuantity=parseInt($("input#pizzaQuantity").val());
+    var inputtedQuantity=parseInt($("input#quantity").val());
     var inputtedSize=$("select#size").val();
     var pizzaTopping1=$("select#toppings1").val();
     var pizzaTopping2=$("select#toppings2").val();
     var pizzaTopping3=$("select#toppings3").val();
     var pizzaTopping4=$("select#toppings4").val();
-    // var inputtedToppings2=$("select#toppings2").val();
-    var newPizzaSize=new PizzaSize(inputtedpizzaQuantity, inputtedSize);
+    var newPizzaOrder=new PizzaOrder(inputtedQuantity, inputtedSize);
     var newToppingList=new Topping(pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4);
 
-    var price=newPizzaSize.sizeCost();
+    var price=newPizzaOrder.sizePrice();
     var additionalCost=newToppingList.additionalCost();
 
     var grandTotal=price+additionalCost;

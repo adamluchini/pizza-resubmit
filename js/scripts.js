@@ -7,37 +7,37 @@ function Topping (pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4){
   this.pizzaTopping4=pizzaTopping4;
 }
 
-function PizzaOrder (quantity, pizzaSize){
+function SizeOrder (quantity, pizzaSize){
   this.quantity=quantity;
   this.pizzaSize=pizzaSize;
 }
 
-Topping.prototype.additionalCost=function(){
-  var additionalCost=0;
+Topping.prototype.toppingCost=function(){
+  var toppingCost=0;
   if(this.pizzaTopping1==="pepperoni"){
-    additionalCost +=1;
+    toppingCost +=1;
   } if (this.pizzaTopping2==="olives"){
-    additionalCost +=1;
+    toppingCost +=1;
   } if (this.pizzaTopping3==="peppers"){
-    additionalCost +=1;
+    toppingCost +=1;
   } if (this.pizzaTopping4==="sausage"){
-    additionalCost +=1;
+    toppingCost +=1;
 
   }
-  return additionalCost
+  return toppingCost
 }
 
-PizzaOrder.prototype.sizePrice=function(){
-  var orderCost=0;
+SizeOrder.prototype.sizePrice=function(){
+  var sizeCost=0;
   if(this.pizzaSize === "small"){
-    orderCost += 10;
+    sizeCost += 10;
   } else if(this.pizzaSize==="medium"){
-    orderCost += 13;
+    sizeCost += 13;
   } else {
-    orderCost +=15;
+    sizeCost +=15;
   }
 
-var orderPrice=orderCost*this.quantity;
+var orderPrice=sizeCost*this.quantity;
 return orderPrice
 }
 //user interface
@@ -51,13 +51,14 @@ $(document).ready(function(){
     var pizzaTopping2=$("select#toppings2").val();
     var pizzaTopping3=$("select#toppings3").val();
     var pizzaTopping4=$("select#toppings4").val();
-    var newPizzaOrder=new PizzaOrder(inputtedQuantity, inputtedSize);
+    
+    var newSizeOrder=new SizeOrder(inputtedQuantity, inputtedSize);
     var newToppingList=new Topping(pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4);
 
-    var price=newPizzaOrder.sizePrice();
-    var additionalCost=newToppingList.additionalCost();
+    var sizePrice=newSizeOrder.sizePrice();
+    var toppingCost=newToppingList.toppingCost();
 
-    var grandTotal=price+additionalCost;
+    var grandTotal=sizePrice+toppingCost;
     $("#result").show(function(){
       $("#order-price").text(grandTotal);
     });

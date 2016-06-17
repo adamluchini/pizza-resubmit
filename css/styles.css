@@ -1,0 +1,15 @@
+#result{
+  display: none;
+}
+
+.jumbotron{
+  text-align: center;
+}
+
+.form-group{
+  font-size: 30px;
+}
+
+.form-button{
+  font-size: 30px;
+}

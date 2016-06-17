@@ -32,10 +32,12 @@ $(document).ready(function(){
 
     var inputtedQuantity=parseInt($("input#quantity").val());
     var inputtedSize=$("select#size").val();
-    var inputtedToppings=$("select#toppings").val();
-    var newPizzaOrder=new PizzaOrder(inputtedQuantity, inputtedSize, inputtedToppings);
+    var inputtedToppings1=$("select#toppings1").val();
+    var inputtedToppings2=$("select#toppings2").val();
+    var newPizzaOrder=new PizzaOrder(inputtedQuantity, inputtedSize, inputtedToppings1, inputtedToppings2);
 
-    console.log(inputtedQuantity);
+    console.log(inputtedToppings1);
+    console.log(inputtedToppings2);
     var price=newPizzaOrder.calculatePrice();
     $("#result").show(function(){
       $("#order-price").text(price);

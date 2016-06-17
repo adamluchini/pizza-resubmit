@@ -1,11 +1,10 @@
 function PizzaOrder (quantity, pizzaSize, pizzaToppings) {
   this.quantity=quantity;
   this.pizzaSize=pizzaSize;
-  this.pizzaToppings=pizzaToppings
+  this.pizzaToppings=pizzaToppings;
 }
 
-PizzaOrder.prototype.calculatePrice=
-function(){
+PizzaOrder.prototype.calculatePrice=function(){
   var orderCost=0;
   if(this.pizzaSize === "small"){
     orderCost += 12;
@@ -18,6 +17,14 @@ function(){
 var finalPrice=orderCost*this.quantity;
 return finalPrice
 }
+
+// PizzaOrder.prototype.additionalCost=function(){
+//   var additionalCost=0;
+//   if(this.pizzaToppings1=== "pepperoni" || "olives")
+//   orderCost +=6
+// }else{
+//   orderCost +=1
+// }
 
 $(document).ready(function(){
   $("form#order").submit(function(event){

@@ -15,11 +15,11 @@ Topping.prototype.additionalCost=function(){
   var additionalCost=0;
   if(this.pizzaTopping1==="pepperoni"){
     additionalCost +=1;
-  } else if (this.pizzaTopping2==="olives"){
+  } if (this.pizzaTopping2==="olives"){
     additionalCost +=1;
-  } else if (this.pizzaTopping3==="peppers"){
+  } if (this.pizzaTopping3==="peppers"){
     additionalCost +=1;
-  } else if (this.pizzaTopping4==="sausage"){
+  } if (this.pizzaTopping4==="sausage"){
     additionalCost +=1;
   } else{
 

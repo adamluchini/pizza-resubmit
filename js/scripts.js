@@ -14,17 +14,19 @@ PizzaOrder.prototype.calculatePrice=function(){
     orderCost +=20;
   }
 
-var finalPrice=orderCost*this.quantity;
-return finalPrice
+var orderPrice=orderCost*this.quantity;
+return orderPrice
 }
 
-// PizzaOrder.prototype.additionalCost=function(){
-//   var additionalCost=0;
-//   if(this.pizzaToppings1=== "pepperoni" || "olives")
-//   orderCost +=6
-// }else{
-//   orderCost +=1
-// }
+PizzaOrder.prototype.additionalCost=function(){
+  var additionalCost=0;
+  if(this.pizzaToppings1=== "pepperoni" || "olives"){
+  additionalCost+=6;
+  } else {
+  additionalCost+=1;
+  }
+  return additionalCost
+}
 
 $(document).ready(function(){
   $("form#order").submit(function(event){
@@ -38,9 +40,12 @@ $(document).ready(function(){
 
     console.log(inputtedToppings1);
     console.log(inputtedToppings2);
+    // console.log(finalPrice);
     var price=newPizzaOrder.calculatePrice();
+    var additionalCost=newPizzaOrder.additionalCost();
+    var grandTotal=price+additionalCost;
     $("#result").show(function(){
-      $("#order-price").text(price);
+      $("#order-price").text(grandTotal);
     });
   });
 });

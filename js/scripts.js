@@ -1,21 +1,29 @@
 //business class
-
-function Topping (pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4){
+function PizzaOrder (pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4, pizzaQuantity, pizzaSize){
   this.pizzaTopping1=pizzaTopping1;
   this.pizzaTopping2=pizzaTopping2;
   this.pizzaTopping3=pizzaTopping3;
   this.pizzaTopping4=pizzaTopping4;
-}
-
-function SizeOrder (pizzaSize){
+  this.pizzaQuantity=pizzaQuantity;
   this.pizzaSize=pizzaSize;
 }
-
-function Quantity (pizzaQuantity){
-  this.pizzaQuantity=pizzaQuantity;
+PizzaOrder.prototype.quantityCost=function(){
+  var quantityCost=0;
+  if(this.pizzaQuantity === "1"){
+    quantityCost +=1;
+  } else if(this.pizzaQuantity==="2"){
+    quantityCost +=2;
+  } else if (this.pizzaQuantity==="3"){
+    quantityCost +=3;
+  } else if (this.pizzaQuantity === "4"){
+    quantityCost +=4;
+  } else {
+    quantityCost +=5;
+  }
+  return quantityCost
 }
 
-Topping.prototype.toppingCost=function(){
+PizzaOrder.prototype.toppingCost=function(){
   var toppingCost=0;
   if(this.pizzaTopping1==="pepperoni"){
     toppingCost +=1;
@@ -30,56 +38,36 @@ Topping.prototype.toppingCost=function(){
   return toppingCost
 }
 
-SizeOrder.prototype.sizePrice=function(){
+PizzaOrder.prototype.sizePrice=function(){
   var sizePrice=0;
   if(this.pizzaSize === "small"){
-    sizePrice += 10;
-  } else if(this.pizzaSize=== "medium"){
-    sizePrice += 13;
+    sizePrice +=10;
+  } else if(this.pizzaSize==="medium"){
+    sizePrice +=13;
   } else {
     sizePrice +=15;
   }
 
-// var orderPrice=sizeCost*this.quantity;
 return sizePrice
 }
-
-Quantity.prototype.quantityCost=function(){
-  var quantityCost=0;
-  if(this.pizzaQuantity=== "1"){
-    quantityCost +=1;
-  } else if (this.pizzaQuantity=== "2"){
-    quantityCost +=2;
-  } else if (this.pizzaQuantity=== "3"){
-    quantityCost +=3;
-  } else if (this.pizzaQuantity=== "4"){
-    quantityCost +=4;
-  } else {
-    quantityCost +=5;
-  }
-  return quantityCost
-}
-
-
 //user interface
 $(document).ready(function(){
   $("form#order").submit(function(event){
     event.preventDefault();
 
-    var inputtedQuantity=$("select#quantity").val();
-    var inputtedSize=$("select#size").val();
     var pizzaTopping1=$("select#toppings1").val();
     var pizzaTopping2=$("select#toppings2").val();
     var pizzaTopping3=$("select#toppings3").val();
     var pizzaTopping4=$("select#toppings4").val();
+    var inputtedQuantity=$("select#quantity").val();
+    var inputtedSize=$("select#size").val();
 
-    var newSizeOrder=new SizeOrder(inputtedSize);
-    var newToppingList=new Topping(pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4);
-    var newQuantityMult=new Quantity(inputtedQuantity);
+    var FinalOrder=new PizzaOrder(pizzaTopping1, pizzaTopping2, pizzaTopping3, pizzaTopping4, inputtedQuantity, inputtedSize);
 
-    var sizePrice=newSizeOrder.sizePrice();
-    var toppingCost=newToppingList.toppingCost();
-    var quantityCost=newQuantityMult.quantityCost();
+    var sizePrice=FinalOrder.sizePrice();
+    var toppingCost=FinalOrder.toppingCost();
+    var quantityCost=FinalOrder.quantityCost();
+
     var grandTotal=(sizePrice+toppingCost)*quantityCost;
     $("#result").show()
       $("#order-price").text(grandTotal);
